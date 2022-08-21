@@ -43,7 +43,7 @@ class App extends Component {
           <NumList/>
       </View>
     )
-  }
+  } 
 }
 
 const styles = StyleSheet.create({
