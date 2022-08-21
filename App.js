@@ -7,64 +7,73 @@
  */
 
 import React, { Component } from 'react';
-import {View, Text,StyleSheet} from 'react-native';
+import {View, Text,Button, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import PropsChild from './propsChild';
+import Header from './src/header';
+import Generator from './src/generator';
+import NumList from './src/numlist';
 
 class App extends Component {
 
   state = {
-    sampleText: 'Hello World', 
-    sampleBoolean: false,
-    sampleNum :1
+    appName: 'My First App',
+    random : [36,999]
   }
 
-  inputText = () =>(
-    this.state.sampleBoolean ?
-    <Text>{this.state.sampleText}</Text>
-    :
-    <Text>sampleBoolean is false</Text>
-  )
-
-  changeState = () => {
-    if(!this.state.sampleBoolean){
-      this.setState({
-        sampleText: 'Text Changed',
-        sampleBoolean: true
-      })
-    }else{
-        this.setState({
-          sampleText: 'Hello World',
-          sampleBoolean: false
-        })
-    }
-
-  }
-
-  onAdd = () => {
-    this.setState(prevState => {
-      return{
-        sampleNum : prevState.sampleNum + 1
-      }
-    })
+  onAddRandomNum = () => {
+    alert('add random number')
   }
 
   render() {
     return(
-      <View style={styles.background}>
-      
-      <PropsChild sampleText={this.state.sampleText} changeState={this.changeState}/>
+      <View style={styles.mainView}>
+         <Header name={this.state.appName}/>
+
+        <View>
+          <Text
+            style = {styles.mainText}
+            onPress={()=> alert('text touch event')}
+            >Hellow world
+            </Text>
+        </View>
+
         
+         
+          <Generator add={this.onAddRandomNum}/>
+          <NumList/>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  background: {
+  mainView: {
     flex:1,
+    backgroundColor: 'white',
+    marginTop: 50,
+    alignItems : 'center',
+    justifyContent: 'center'
+  },
+  subView :{
+    backgroundColor: 'yellow',
+    marginBottom: 10,
+  },
+  anotherSubView: {
+    flex:2,
+    backgroundColor: 'yellow',
+    marginBottom : 10,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  mainText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    padding: 20
   }
-})
+},
+)
+
 
 export default App;
