@@ -21,7 +21,21 @@ class App extends Component {
   }
 
   onAddRandomNum = () => {
-    alert('add random number')
+    const randomNum = Math.floor(Math.random()*100)+1;
+    this.setState(prevState => {
+      return{
+        random: [...prevState.random, randomNum]
+      }
+    })
+  } 
+
+  onNumDelete = (position) =>{
+    const newArray = this.state.random.filter((num,index) => {
+      return position != index; //에를들어 3을 클릭하면 3이 아닌 모든 배열을 리턴함 
+    })
+    this.setState({
+      random: newArray
+    })
   }
 
   render() {
@@ -40,7 +54,9 @@ class App extends Component {
         
          
           <Generator add={this.onAddRandomNum}/>
-          <NumList/>
+          <NumList num={this.state.random}
+          delete = {this.onNumDelete}
+          />
       </View>
     )
   } 
@@ -52,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: 50,
     alignItems : 'center',
-    justifyContent: 'center'
+    // justifyContent: 'center'
   },
   subView :{
     backgroundColor: 'yellow',

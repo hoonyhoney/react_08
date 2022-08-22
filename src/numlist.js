@@ -7,18 +7,21 @@
  */
 
  import React, { Component } from 'react';
- import {View, Text,Button,StyleSheet} from 'react-native';
+ import {View, Text,Button,StyleSheet,TouchableOpacity} from 'react-native';
 
 
  const NumList = (props) => {
     return(
-        <View style={styles.numList}>
-            <Button
-                title="Hello Again"
-                
-            />
+        props.num.map((item,idx)=>(
+        <TouchableOpacity 
+            style={styles.numList} 
+            key={idx}
+            onPress={()=> props.delete(idx)}    
+        >
+            <Text>{item}</Text>
 
-        </View>
+        </TouchableOpacity>
+    ))
     )
  }
  
