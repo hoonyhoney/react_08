@@ -13,7 +13,6 @@ import Header from './src/header';
 import Generator from './src/generator';
 import NumList from './src/numlist';
 
-//gitTest
 class App extends Component {
 
   state = {
