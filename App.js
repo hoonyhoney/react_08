@@ -7,11 +7,12 @@
  */
 
 import React, { Component } from 'react';
-import {View, Text,Button, Image,StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text,Button, Image,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
 import PropsChild from './propsChild';
 import Header from './src/header';
 import Generator from './src/generator';
 import NumList from './src/numlist';
+import Input from './src/input';
 
 class App extends Component {
 
@@ -54,9 +55,23 @@ class App extends Component {
         
          
           <Generator add={this.onAddRandomNum}/>
+          <ScrollView
+            style={{width:'100%'}}
+            //onMomentumScrollBegin={() => alert('begin')}
+            //onMomentumScrollEnd={() => alert('end')} 
+            //onScroll={()=> alert('scrolling')}
+            //onContentSizeChange={(width, height)=> alert(height)}        
+            bounces={true}
+          >
           <NumList num={this.state.random}
           delete = {this.onNumDelete}
           />
+
+
+          </ScrollView>
+
+
+          
       </View>
     )
   } 
