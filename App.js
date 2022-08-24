@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import {View, Text,Button, Image,StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
+import {View, Text,Button, Image,StyleSheet, TouchableOpacity,ScrollView,TextInput} from 'react-native';
 import PropsChild from './propsChild';
 import Header from './src/header';
 import Generator from './src/generator';
@@ -16,62 +16,25 @@ import Input from './src/input';
 
 class App extends Component {
 
-  state = {
-    appName: 'My First App',
-    random : [36,999]
-  }
-
-  onAddRandomNum = () => {
-    const randomNum = Math.floor(Math.random()*100)+1;
-    this.setState(prevState => {
-      return{
-        random: [...prevState.random, randomNum]
-      }
-    })
-  } 
-
-  onNumDelete = (position) =>{
-    const newArray = this.state.random.filter((num,index) => {
-      return position != index; //에를들어 3을 클릭하면 3이 아닌 모든 배열을 리턴함 
-    })
-    this.setState({
-      random: newArray
-    })
+  onAddTextInput = () => {
+    alert('I want to add TextInput')
   }
 
   render() {
     return(
       <View style={styles.mainView}>
-         <Header name={this.state.appName}/>
-
-        <View>
-          <Text
-            style = {styles.mainText}
-            onPress={()=> alert('text touch event')}
-            >Hellow world
-            </Text>
-        </View>
-
-        
-         
-          <Generator add={this.onAddRandomNum}/>
-          <ScrollView
-            style={{width:'100%'}}
-            //onMomentumScrollBegin={() => alert('begin')}
-            //onMomentumScrollEnd={() => alert('end')} 
-            //onScroll={()=> alert('scrolling')}
-            //onContentSizeChange={(width, height)=> alert(height)}        
-            bounces={true}
+         <TextInput
+             value={this.state.myTextInput}
+            style={styles.input}
+            onChangeText={this.onChangeInput}
+            multiline={true}
+            maxLength={100}
+            />
+         <Button
+          title="Add Text Input"
+          onPress={this.onAddTextInput}
           >
-          <NumList num={this.state.random}
-          delete = {this.onNumDelete}
-          />
-
-
-          </ScrollView>
-
-
-          
+          </Button> 
       </View>
     )
   } 
@@ -102,7 +65,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'red',
     padding: 20
-  }
+  },
+  input: {
+    width: '100%',
+    backgroundColor: '#cecece',
+    marginTop: 20,
+    fontSize: 25,
+    padding: 10
+
+}
 },
 )
 
