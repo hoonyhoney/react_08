@@ -13,17 +13,35 @@ import Header from './src/header';
 import Generator from './src/generator';
 import NumList from './src/numlist';
 import Input from './src/input';
+import Picker from './src/picker';
 
 class App extends Component {
 
+  state = {
+        myTextInput: '',
+        alphabet : ['a', 'b','c','d']
+    }
+
+    onChangeInput = (event) => {
+        this.setState({
+            myTextInput : event
+        })
+    }
+
   onAddTextInput = () => {
-    alert('I want to add TextInput')
+    this.setState(prevState=>{
+      return{
+        myTextInput : '',
+        alphabet : [...prevState.alphabet, prevState.myTextInput]
+      }
+    })
   }
 
   render() {
     return(
       <View style={styles.mainView}>
-         <TextInput
+        <Picker/>
+                     <TextInput
              value={this.state.myTextInput}
             style={styles.input}
             onChangeText={this.onChangeInput}
@@ -34,7 +52,22 @@ class App extends Component {
           title="Add Text Input"
           onPress={this.onAddTextInput}
           >
-          </Button> 
+          </Button>
+          <ScrollView style={{width:'100%'}}>
+            {
+              this.state.alphabet.map((item, idx)=> (
+                <Text 
+                style={styles.mainText}
+                key = {idx}
+                >
+                  {item}
+                </Text>
+              ))
+
+            }
+
+
+          </ScrollView>
       </View>
     )
   } 
@@ -64,7 +97,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'red',
-    padding: 20
+    padding: 20,
+    margin: 20,
+    backgroundColor: 'pink'
   },
   input: {
     width: '100%',
